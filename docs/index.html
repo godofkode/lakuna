@@ -63,20 +63,22 @@
     position: relative; width: 120px; height: 120px;
     animation: ringOut .95s cubic-bezier(.65,0,.35,1) .72s forwards;
   }
-  .intro-dot {
+  /* flat-top hexagons, packed as a honeycomb rosette like the logo mark */
+  .intro-hex {
     position: absolute; top: 50%; left: 50%;
-    width: 18px; height: 18px; margin: -9px 0 0 -9px;
-    border-radius: 50%; background: var(--violet); opacity: 0;
+    width: 34px; height: 29.4px; margin: -14.7px 0 0 -17px;
+    background: var(--violet); opacity: 0;
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
     animation: dotIn .45s cubic-bezier(.34,1.56,.64,1) forwards;
     --tx: 0px; --ty: 0px;
   }
-  .intro-dot:nth-child(1) { animation-delay: 0s; }
-  .intro-dot:nth-child(2) { --tx: 0.0px;   --ty: -44.0px; animation-delay: 0.08s; }
-  .intro-dot:nth-child(3) { --tx: 38.1px;  --ty: -22.0px; animation-delay: 0.13s; }
-  .intro-dot:nth-child(4) { --tx: 38.1px;  --ty: 22.0px;  animation-delay: 0.18s; }
-  .intro-dot:nth-child(5) { --tx: 0.0px;   --ty: 44.0px;  animation-delay: 0.23s; }
-  .intro-dot:nth-child(6) { --tx: -38.1px; --ty: 22.0px;  animation-delay: 0.28s; }
-  .intro-dot:nth-child(7) { --tx: -38.1px; --ty: -22.0px; animation-delay: 0.33s; }
+  .intro-hex:nth-child(1) { animation-delay: 0s; }
+  .intro-hex:nth-child(2) { --tx: 0.0px;   --ty: -32.4px; animation-delay: 0.08s; }
+  .intro-hex:nth-child(3) { --tx: 28.1px;  --ty: -16.2px; animation-delay: 0.13s; }
+  .intro-hex:nth-child(4) { --tx: 28.1px;  --ty: 16.2px;  animation-delay: 0.18s; }
+  .intro-hex:nth-child(5) { --tx: 0.0px;   --ty: 32.4px;  animation-delay: 0.23s; }
+  .intro-hex:nth-child(6) { --tx: -28.1px; --ty: 16.2px;  animation-delay: 0.28s; }
+  .intro-hex:nth-child(7) { --tx: -28.1px; --ty: -16.2px; animation-delay: 0.33s; }
 
   @keyframes dotIn {
     from { opacity: 0; transform: translate(0, 0) scale(0); }
@@ -405,13 +407,13 @@
 
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro-ring">
-    <span class="intro-dot"></span>
-    <span class="intro-dot"></span>
-    <span class="intro-dot"></span>
-    <span class="intro-dot"></span>
-    <span class="intro-dot"></span>
-    <span class="intro-dot"></span>
-    <span class="intro-dot"></span>
+    <span class="intro-hex"></span>
+    <span class="intro-hex"></span>
+    <span class="intro-hex"></span>
+    <span class="intro-hex"></span>
+    <span class="intro-hex"></span>
+    <span class="intro-hex"></span>
+    <span class="intro-hex"></span>
   </div>
 </div>
 
