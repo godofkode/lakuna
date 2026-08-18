@@ -18,6 +18,9 @@
     --ink-dimmer: #6B6575;
 
     /* one accent family: violet = local / Lakuna, slate = frontier */
+    --wash-top: #FCE2CD;
+    --wash-bottom: #F0EFCC;
+
     --violet: #6D4AFF;
     --violet-deep: #4A2FD0;
     --violet-soft: #EDE8FF;
@@ -35,7 +38,13 @@
   body {
     margin: 0;
     font-family: var(--sans);
-    background: var(--bg);
+    background: linear-gradient(180deg,
+      var(--wash-top) 0%,
+      #F8EDE0 11%,
+      var(--bg) 28%,
+      var(--bg) 68%,
+      #F6F3DC 89%,
+      var(--wash-bottom) 100%);
     color: var(--ink);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -46,7 +55,7 @@
   /* ---------- intro animation ---------- */
   .intro {
     position: fixed; inset: 0; z-index: 100;
-    background: var(--bg);
+    background: linear-gradient(180deg, var(--wash-top) 0%, var(--bg) 55%, var(--wash-bottom) 100%);
     display: flex; align-items: center; justify-content: center;
     animation: introOut .55s ease 1.45s forwards;
   }
@@ -83,12 +92,13 @@
 
   /* ---------- background layers ---------- */
   .hex-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .hex-bg svg { width: 100%; height: 100%; }
-  .hex-bg polygon { fill: none; stroke: var(--violet); stroke-width: 1; stroke-opacity: 0.13; }
-  .hex-bg-fade {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 90% 80% at 50% 20%, transparent 50%, var(--bg) 100%);
+  .hex-bg svg {
+    width: 100%; height: 100%;
+    -webkit-mask-image: radial-gradient(ellipse 95% 85% at 50% 20%, #000 42%, transparent 100%);
+    mask-image: radial-gradient(ellipse 95% 85% at 50% 20%, #000 42%, transparent 100%);
   }
+  .hex-bg polygon { fill: none; stroke: var(--violet); stroke-width: 1; stroke-opacity: 0.13; }
+  .hex-bg-fade { display: none; }
 
   .orb { position: fixed; border-radius: 50%; filter: blur(100px); z-index: 0; pointer-events: none; }
   .orb-1 { width: 460px; height: 460px; background: var(--violet); opacity: 0.13; top: -130px; left: -110px; animation: drift1 24s ease-in-out infinite; }
@@ -109,7 +119,7 @@
   /* ---------- nav ---------- */
   .nav {
     position: sticky; top: 0; z-index: 30;
-    background: rgba(244,240,232,0.86);
+    background: rgba(250,245,238,0.80);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
@@ -170,11 +180,11 @@
   .section { max-width: 1220px; margin: 0 auto; padding: 96px 32px; position: relative; }
   .section::before {
     content: ""; position: absolute; top: 0; left: 0; right: 0; height: 440px;
-    background: linear-gradient(180deg, rgba(244,240,232,0.95) 0%, rgba(244,240,232,0.85) 45%, rgba(244,240,232,0.45) 75%, transparent 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.62) 45%, rgba(255,255,255,0.3) 75%, transparent 100%);
     z-index: -1; pointer-events: none;
   }
   .section.alt {
-    background: var(--bg-soft); max-width: none;
+    background: rgba(234,228,217,0.55); max-width: none;
     border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
   }
   .section.alt > * { max-width: 1220px; margin-left: auto; margin-right: auto; }
@@ -251,6 +261,21 @@
     background-repeat: no-repeat; background-position: right 6px center;
   }
   .blank:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+  /* riso-style "filled in with a marker" swatch behind each choice */
+  .blank-wrap { position: relative; display: inline-block; }
+  .blank-fill {
+    position: absolute; inset: -3px -9px -5px -7px; z-index: 0;
+    border-radius: 16px 6px 13px 7px / 8px 13px 6px 16px;
+    background-color: var(--violet-soft);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)' opacity='0.5'/%3E%3C/svg%3E");
+    background-blend-mode: multiply;
+    pointer-events: none;
+  }
+  .blank-wrap:nth-of-type(1) .blank-fill { transform: rotate(-0.8deg); }
+  .blank-wrap:nth-of-type(2) .blank-fill { transform: rotate(0.6deg); border-radius: 7px 15px 6px 14px / 14px 6px 16px 7px; }
+  .blank-wrap:nth-of-type(3) .blank-fill { transform: rotate(-0.5deg); border-radius: 13px 8px 16px 6px / 6px 15px 7px 13px; }
+  .blank { position: relative; z-index: 1; }
   .blank option { background: #fff; color: var(--ink); font-size: 15px; font-weight: 500; }
   .b-role { color: var(--violet); }
   .b-task { color: var(--violet-deep); }
@@ -1193,11 +1218,9 @@
     <div class="picker">
       <p class="picker-line">
         I am a
-        <select id="pick-role" class="blank b-role" aria-label="Your role"></select>
-        , I want to
-        <select id="pick-task" class="blank b-task" aria-label="What you want to do"></select>
-        , and I also need to
-        <select id="pick-goal" class="blank b-goal" aria-label="Your additional requirement"></select>.
+        <span class="blank-wrap"><span class="blank-fill" aria-hidden="true"></span><select id="pick-role" class="blank b-role" aria-label="Your role"></select></span>, I want to
+        <span class="blank-wrap"><span class="blank-fill" aria-hidden="true"></span><select id="pick-task" class="blank b-task" aria-label="What you want to do"></select></span>, and I also need to
+        <span class="blank-wrap"><span class="blank-fill" aria-hidden="true"></span><select id="pick-goal" class="blank b-goal" aria-label="Your additional requirement"></select></span>.
       </p>
 
       <div class="result" aria-live="polite">
