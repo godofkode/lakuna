@@ -122,7 +122,6 @@
   .nav-links a:nth-of-type(1):hover { color: var(--amber); }
   .nav-links a:nth-of-type(2):hover { color: var(--cyan); }
   .nav-links a:nth-of-type(3):hover { color: var(--lime); }
-  .nav-links a:nth-of-type(4):hover { color: var(--magenta); }
 
   .cta-small {
     background: var(--amber); color: #000 !important;
@@ -181,14 +180,12 @@
   }
   .btn-primary { background: var(--amber); color: #000; }
   .btn-primary:hover { background: var(--lime); transform: translateY(-2px); }
-  .btn-ghost { border-color: var(--cyan); color: var(--cyan); background: transparent; }
-  .btn-ghost:hover { background: var(--cyan); color: #000; transform: translateY(-2px); }
 
   /* ---------- sections ---------- */
   .section { max-width: 1220px; margin: 0 auto; padding: 96px 32px; position: relative; }
   .section::before {
-    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 300px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.7), transparent);
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 440px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.82) 45%, rgba(0,0,0,0.4) 75%, transparent 100%);
     z-index: -1; pointer-events: none;
   }
   .section.alt {
@@ -297,11 +294,16 @@
   .stat-source { font-family: var(--mono); font-size: 11px; color: var(--ink-dimmer); margin: 0; }
 
   /* ---------- why grid ---------- */
-  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
-  .why-item { padding-top: 24px; border-top: 3px solid; }
-  .why-item:nth-child(1) { border-color: var(--amber); }
-  .why-item:nth-child(2) { border-color: var(--cyan); }
-  .why-item:nth-child(3) { border-color: var(--magenta); }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .why-item {
+    padding: 30px 26px; background: #050505;
+    border: 1px solid var(--card-border); border-top: 3px solid var(--card-border);
+    border-radius: 3px; transition: transform .2s ease;
+  }
+  .why-item:hover { transform: translateY(-4px); }
+  .why-item:nth-child(1) { border-top-color: var(--amber); }
+  .why-item:nth-child(2) { border-top-color: var(--cyan); }
+  .why-item:nth-child(3) { border-top-color: var(--magenta); }
   .why-item h4 {
     margin: 0 0 12px; font-family: var(--display); font-weight: 400;
     font-size: 23px; text-transform: uppercase; letter-spacing: 0.01em; color: var(--ink);
@@ -428,7 +430,7 @@
     .picker { padding: 32px 24px; }
     .picker-line { line-height: 2.3; }
     .market-grid { grid-template-columns: 1fr; }
-    .why-grid { grid-template-columns: 1fr; gap: 28px; }
+    .why-grid { grid-template-columns: 1fr; gap: 16px; }
     .nav-links { gap: 16px; font-size: 11px; }
     .hero { padding: 80px 24px 50px; }
     .section { padding: 70px 24px; }
@@ -1151,7 +1153,6 @@
       </span>
     </div>
     <div class="nav-links">
-      <a href="#flow">The Routing</a>
       <a href="#how">How It Works</a>
       <a href="#demo">Demo</a>
       <a href="#market">Market</a>
@@ -1171,7 +1172,6 @@
     </h1>
     <div class="hero-actions">
       <a href="#waitlist" class="btn btn-primary">Join the waitlist</a>
-      <a href="#flow" class="btn btn-ghost">See the routing</a>
     </div>
   </div>
 </header>
